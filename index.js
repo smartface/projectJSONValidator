@@ -27,7 +27,8 @@
 
     ProjectJSONValidator.prototype.fillOptionals = function fillOptionals() {
         var projectJSON = this.projectJSON;
-        if (this.target === exports.RAU_PUBLISH_TARGET && projectJSON && projectJSON.config && projectJSON.config.rau) {
+        if (projectJSON && projectJSON.config) {
+            projectJSON.config.rau = projectJSON.config.rau || {};
             var rau = projectJSON.config.rau;
             if (typeof rau.formatVersion === "undefined") rau.formatVersion = "1.0.0";
             if (typeof rau.hashType === "undefined") rau.hashType = "md5";
