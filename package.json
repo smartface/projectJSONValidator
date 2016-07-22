@@ -1,0 +1,22 @@
+{
+  "name": "project-json-validator",
+  "version": "1.0.0",
+  "description": "Validates project.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smartface/projectJSONValidator.git"
+  },
+  "keywords": [
+    "Smartface"
+  ],
+  "author": "Smartface, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smartface/projectJSONValidator/issues"
+  },
+  "homepage": "https://github.com/smartface/projectJSONValidator#readme"
+}
