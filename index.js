@@ -72,7 +72,7 @@
                     }
                     else {
                         reId.lastIndex = 0;
-                        if (!reId.test(build.ios.bundeIdentifier)) {
+                        if (!reId.test(build.ios.bundleIdentifier)) {
                             var invalidBundeIdentifierMessage = "build.output.ios.bundeIdentifier is not a valid ios bunde identifier";
                             this.isiOS() ? error(invalidBundeIdentifierMessage) : warning(invalidBundeIdentifierMessage);
                         }
