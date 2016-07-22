@@ -1,6 +1,6 @@
 {
   "name": "project-json-validator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Validates project.json",
   "main": "index.js",
   "scripts": {
