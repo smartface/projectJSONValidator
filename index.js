@@ -7,27 +7,27 @@
             exports: {}
         };
         factory(module, module.exports);
-        return global.projectJSONValidator = module.exports;
+        return global.ProjectJSONValidator = module.exports;
     }
 })(typeof window !== "undefined" ? window : this, function(module, exports) {
 
     /**
-     * Creates a new projectJSONValidator
+     * Creates a new ProjectJSONValidator
      * @class
      * @param {Object} projectJSON - (required) project.json file as JavaScript object 
      * @param {string} publishTarget - (required) is local or rau 
      * @param {string} os - (optional) ios, android or all. Default value is all
      */
-    function projectJSONValidator(projectJSON, publishTarget, os) {
+    function ProjectJSONValidator(projectJSON, publishTarget, os) {
         this.target = publishTarget || exports.LOCAL_PUBLISH_TARGET;
         this.projectJSON = projectJSON;
         os = os || "";
         this.os = os.toLowerCase() || "all";
     }
 
-    projectJSONValidator.prototype.fillOptionals = function fillOptionals() {
+    ProjectJSONValidator.prototype.fillOptionals = function fillOptionals() {
         var projectJSON = this.projectJSON;
-        if (this.target === exports.RAU_TARGET && projectJSON && projectJSON.config && projectJSON.config.rau) {
+        if (this.target === exports.RAU_PUBLISH_TARGET && projectJSON && projectJSON.config && projectJSON.config.rau) {
             var rau = projectJSON.config.rau;
             if (typeof rau.formatVersion === "undefined") rau.formatVersion = "1.0.0";
             if (typeof rau.hashType === "undefined") rau.hashType = "md5";
@@ -37,7 +37,7 @@
         }
     };
 
-    projectJSONValidator.prototype.checkRequirements = function checkRequirements() {
+    ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
         var reId = /[a-z]+\.[a-z]+/;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
         var projectJSON = this.projectJSON;
@@ -116,7 +116,7 @@
         }
         else {
             var config = projectJSON.config;
-            if (this.target === projectJSONValidator.RAU_PUBLISH_TARGET) {
+            if (this.target === ProjectJSONValidator.RAU_PUBLISH_TARGET) {
                 if (typeof config.rau !== "object") {
                     error("cofig.rau is not an object");
                 }
@@ -182,22 +182,20 @@
         }
     };
 
-    projectJSONValidator.LOCAL_PUBLISH_TARGET = "local";
-    projectJSONValidator.RAU_PUBLISH_TARGET = "rau";
+    ProjectJSONValidator.LOCAL_PUBLISH_TARGET = "local";
+    ProjectJSONValidator.RAU_PUBLISH_TARGET = "rau";
 
-    projectJSONValidator.prototype.isiOS = function isiOS() {
+    ProjectJSONValidator.prototype.isiOS = function isiOS() {
         return this.os === "all" || this.os === "ios";
     };
 
-    projectJSONValidator.prototype.isAndroid = function isAndroid() {
+    ProjectJSONValidator.prototype.isAndroid = function isAndroid() {
         return this.os === "all" || this.os === "android";
     };
 
-    module.exports = projectJSONValidator;
+    module.exports = ProjectJSONValidator;
 
     function isStringAndNotEmpty(value) {
         return typeof value === "string" && value.length !== 0;
     }
-
-
 });
