@@ -56,39 +56,44 @@
             error("build object is missing");
         }
         else {
-            var build = projectJSON.build;
-            if (typeof build.ios !== "object") {
-                var iOSBuildMessage = "build.ios is not an object";
-                this.isiOS() ? error(iOSBuildMessage) : warning(iOSBuildMessage);
+            if (typeof projectJSON.build.output !== "object") {
+                error("build.output is not an object");
             }
             else {
-                if (!isStringAndNotEmpty(build.ios.bundeIdentifier)) {
-                    var bundeIdentifierMessage = "build.ios.bundeIdentifier is missing";
-                    this.isiOS() ? error(bundeIdentifierMessage) : warning(bundeIdentifierMessage);
+                var build = projectJSON.build.output;
+                if (typeof build.ios !== "object") {
+                    var iOSBuildMessage = "build.output.ios is not an object";
+                    this.isiOS() ? error(iOSBuildMessage) : warning(iOSBuildMessage);
                 }
                 else {
-                    reId.lastIndex = 0;
-                    if (!reId.test(build.ios.bundeIdentifier)) {
-                        var invalidBundeIdentifierMessage = "build.ios.bundeIdentifier is not a valid ios bunde identifier";
-                        this.isiOS() ? error(invalidBundeIdentifierMessage) : warning(invalidBundeIdentifierMessage);
+                    if (!isStringAndNotEmpty(build.ios.bundeIdentifier)) {
+                        var bundeIdentifierMessage = "build.ios.bundeIdentifier is missing";
+                        this.isiOS() ? error(bundeIdentifierMessage) : warning(bundeIdentifierMessage);
+                    }
+                    else {
+                        reId.lastIndex = 0;
+                        if (!reId.test(build.ios.bundeIdentifier)) {
+                            var invalidBundeIdentifierMessage = "build.output.ios.bundeIdentifier is not a valid ios bunde identifier";
+                            this.isiOS() ? error(invalidBundeIdentifierMessage) : warning(invalidBundeIdentifierMessage);
+                        }
                     }
                 }
-            }
 
-            if (typeof build.android !== "object") {
-                var androidBuildMessage = "build.android is not an object";
-                this.isiOS() ? error(androidBuildMessage) : warning(androidBuildMessage);
-            }
-            else {
-                if (!isStringAndNotEmpty(build.android.packageName)) {
-                    var packageNameMessage = "build.android.packageName is missing";
-                    this.isiOS() ? error(packageNameMessage) : warning(packageNameMessage);
+                if (typeof build.android !== "object") {
+                    var androidBuildMessage = "build.output.android is not an object";
+                    this.isiOS() ? error(androidBuildMessage) : warning(androidBuildMessage);
                 }
                 else {
-                    reId.lastIndex = 0;
-                    if (!reId.test(build.android.packageName)) {
-                        var invalidPackageNameMessage = "build.android.packageName is not a valid android package name";
-                        this.isiOS() ? error(invalidPackageNameMessage) : warning(invalidPackageNameMessage);
+                    if (!isStringAndNotEmpty(build.android.packageName)) {
+                        var packageNameMessage = "build.output.android.packageName is missing";
+                        this.isiOS() ? error(packageNameMessage) : warning(packageNameMessage);
+                    }
+                    else {
+                        reId.lastIndex = 0;
+                        if (!reId.test(build.android.packageName)) {
+                            var invalidPackageNameMessage = "build.output.android.packageName is not a valid android package name";
+                            this.isiOS() ? error(invalidPackageNameMessage) : warning(invalidPackageNameMessage);
+                        }
                     }
                 }
             }
@@ -161,7 +166,7 @@
                             error("config.rau.minimumSupportedVersion is not a valid version");
                         }
                     }
-                    
+
                     if (!isStringAndNotEmpty(rau.profileKey)) {
                         error("config.rau.profileKey is missing");
                     }
