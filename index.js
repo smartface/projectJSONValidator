@@ -66,9 +66,9 @@
                     this.isiOS() ? error(iOSBuildMessage) : warning(iOSBuildMessage);
                 }
                 else {
-                    if (!isStringAndNotEmpty(build.ios.bundeIdentifier)) {
-                        var bundeIdentifierMessage = "build.ios.bundeIdentifier is missing";
-                        this.isiOS() ? error(bundeIdentifierMessage) : warning(bundeIdentifierMessage);
+                    if (!isStringAndNotEmpty(build.ios.bundleIdentifier)) {
+                        var bunldeIdentifierMessage = "build.output.ios.bundleIdentifier is missing";
+                        this.isiOS() ? error(bunldeIdentifierMessage) : warning(bunldeIdentifierMessage);
                     }
                     else {
                         reId.lastIndex = 0;
