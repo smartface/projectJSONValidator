@@ -124,7 +124,7 @@
             var config = projectJSON.config;
             if (this.target === ProjectJSONValidator.RAU_PUBLISH_TARGET) {
                 if (typeof config.rau !== "object") {
-                    error("cofig.rau is not an object");
+                    error("config.rau is not an object");
                 }
                 else {
                     var rau = config.rau;
