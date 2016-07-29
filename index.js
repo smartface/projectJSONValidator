@@ -170,6 +170,11 @@
 
                     if (!isStringAndNotEmpty(rau.profileKey)) {
                         error("config.rau.profileKey is missing");
+                    } else {
+                        var reProfileKey = /[a-zA-Z0-9]{32}/;
+                        if(reProfileKey.test(rau.profileKey)) {
+                            error("config.rau.profileKey is in wrong format");
+                        }
                     }
                 }
             }
