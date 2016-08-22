@@ -39,7 +39,7 @@
     };
 
     ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
-        var reId = /^[a-z]+(\.[a-z]+)+$/;
+        var reId = /^[a-z]+((\.)+[a-z]+)+$/i;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
         var projectJSON = this.projectJSON;
         var result = {
