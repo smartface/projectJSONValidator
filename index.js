@@ -41,6 +41,7 @@
     ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
         var reId = /^[a-z]+((\.)+[a-z]+)+$/i;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
+        var nameRegex = /^[\w-]+$/;
         var projectJSON = this.projectJSON;
         var result = {
             errors: [],
@@ -50,8 +51,6 @@
             error("project.json is not an object");
             return result;
         }
-
-
 
         if (typeof projectJSON.build !== "object") {
             error("build object is missing");
@@ -122,6 +121,9 @@
         }
         else {
             var config = projectJSON.config;
+            if(config.rau && config.rau.currentReleaseChannel && !nameRegex.test(config.rau.currentReleaseChannel)){
+                error("config.rau.currentReleaseChannel is invalid");
+            }
             if (this.target === ProjectJSONValidator.RAU_PUBLISH_TARGET) {
                 if (typeof config.rau !== "object") {
                     error("config.rau is not an object");
