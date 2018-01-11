@@ -148,12 +148,11 @@
                         error("config.rau.channels is not an array");
                     }
                     else {
-                        for (var i in rau.channels) {
-                            var c = rau.channels[i];
+                        rau.channels.forEach(c => {
                             if (!isStringAndNotEmpty(c)) {
                                 error('config.rau.channels ["' + c + '"] is not a valid string');
                             }
-                        }
+                        });
                     }
 
                     if (typeof rau.meta === "undefined") {
