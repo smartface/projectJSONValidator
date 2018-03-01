@@ -39,7 +39,8 @@
     };
 
     ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
-        var reId = /^[a-z]+((\.)+[a-z]+)+$/i;
+        var reBundleIdentifier = /^[A-Za-z]{2,6}((?!-)\.[A-Za-z0-9-]{1,63}(?<!-))+$/;
+        var rePackageName = /^([A-Za-z]{1}[A-Za-z\d_]*\.)*[A-Za-z][A-Za-z\d_]*$/;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
         var nameRegex = /^[\w-]+$/;
         var projectJSON = this.projectJSON;
@@ -71,8 +72,8 @@
                         this.isiOS() ? error(bunldeIdentifierMessage) : warning(bunldeIdentifierMessage);
                     }
                     else {
-                        reId.lastIndex = 0;
-                        if (!reId.test(build.ios.bundleIdentifier)) {
+                        reBundleIdentifier.lastIndex = 0;
+                        if (!reBundleIdentifier.test(build.ios.bundleIdentifier)) {
                             var invalidBundleIdentifierMessage = "build.output.ios.bundleIdentifier is not a valid ios bundle identifier";
                             this.isiOS() ? error(invalidBundleIdentifierMessage) : warning(invalidBundleIdentifierMessage);
                         }
@@ -89,8 +90,8 @@
                         this.isiOS() ? error(packageNameMessage) : warning(packageNameMessage);
                     }
                     else {
-                        reId.lastIndex = 0;
-                        if (!reId.test(build.android.packageName)) {
+                        rePackageName.lastIndex = 0;
+                        if (!rePackageName.test(build.android.packageName)) {
                             var invalidPackageNameMessage = "build.output.android.packageName is not a valid android package name";
                             this.isiOS() ? error(invalidPackageNameMessage) : warning(invalidPackageNameMessage);
                         }
