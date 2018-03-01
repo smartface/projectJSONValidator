@@ -39,7 +39,7 @@
     };
 
     ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
-        var reBundleIdentifier = /^[A-Za-z]{2,6}((?!-)\.[A-Za-z0-9-]{1,63}(?<!-))+$/;
+        var reBundleIdentifier = /^[A-Za-z]{2,6}((?!-)\.[A-Za-z0-9-]{1,63})+$/;
         var rePackageName = /^([A-Za-z]{1}[A-Za-z\d_]*\.)*[A-Za-z][A-Za-z\d_]*$/;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
         var nameRegex = /^[\w-]+$/;
