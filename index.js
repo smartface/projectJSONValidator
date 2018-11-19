@@ -39,7 +39,7 @@
     };
 
     ProjectJSONValidator.prototype.checkRequirements = function checkRequirements() {
-        var reBundleIdentifier = /^[A-Za-z]{2,6}((?!-)\.[A-Za-z0-9-]{1,63})+$/;
+        var reBundleIdentifier = /^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+[0-9a-z_]$/i;
         var rePackageName = /^([A-Za-z]{1}[A-Za-z\d_]*\.)*[A-Za-z][A-Za-z\d_]*$/;
         var reVersion = /^(\d+(?:\.\d+)+)$/;
         var nameRegex = /^[\w-]+$/;
@@ -122,7 +122,7 @@
         }
         else {
             var config = projectJSON.config;
-            if(config.rau && config.rau.currentReleaseChannel && !nameRegex.test(config.rau.currentReleaseChannel)){
+            if (config.rau && config.rau.currentReleaseChannel && !nameRegex.test(config.rau.currentReleaseChannel)) {
                 error("config.rau.currentReleaseChannel is invalid");
             }
             if (this.target === ProjectJSONValidator.RAU_PUBLISH_TARGET) {
@@ -172,9 +172,10 @@
 
                     if (!isStringAndNotEmpty(rau.profileKey)) {
                         error("config.rau.profileKey is missing");
-                    } else {
+                    }
+                    else {
                         var reProfileKey = /[a-zA-Z0-9]{32}/;
-                        if(!reProfileKey.test(rau.profileKey)) {
+                        if (!reProfileKey.test(rau.profileKey)) {
                             error("config.rau.profileKey is in wrong format");
                         }
                     }
